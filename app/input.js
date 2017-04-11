@@ -6,11 +6,11 @@ var game = new Bowling.Game();
 var stringScore = process.argv[2];
 
 // format string to remove last pipe characters if no bonus balls
+if (stringScore !== undefined){
+  var stringScore = removePipes(stringScore);
+}
 
-var stringScore = removePipes(stringScore);
-console.log(stringScore);
-
-function removePipes(){
+function removePipes(stringScore){
   if (stringScore[stringScore.length - 1] === '|'){
      return stringScore.substring(0, stringScore.length -2);
   } else {
@@ -38,6 +38,7 @@ function splitScore(stringScore){
 
 // Convert element of array into integer, add together giving frame score
 if (arrayScore !== undefined){
+  console.log(arrayScore);
   arrayScore = convertToInt(arrayScore);
 }
 
@@ -60,3 +61,4 @@ if (arrayScore !== undefined) {
 exports.splitScore = splitScore;
 exports.convertToInt = convertToInt;
 exports.replaceDash = replaceDash;
+exports.removePipes = removePipes;

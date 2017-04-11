@@ -24,4 +24,15 @@ describe("Input", function(){
       expect(Input.replaceDash(fakeStringScore)).to.equal("01|22|13|02");
     });
   });
+
+  describe ("#removePipes", function(){
+    it("removes pipes at end of string if no bonus balls used", function(){
+      var fakeStringScore = "-1|35|21|52|35||";
+      expect(Input.removePipes(fakeStringScore)).to.equal("-1|35|21|52|35");
+    });
+    it("removes the double pipes when bonus balls are thrown", function(){
+      var fakeStringScore = "-1|35|21|52|35||32";
+      expect(Input.removePipes(fakeStringScore)).to.equal("-1|35|21|52|35|32");
+    });
+  });
 });

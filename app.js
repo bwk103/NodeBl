@@ -1,3 +1,2 @@
-process.argv.forEach(function(val, index, array){
-    console.log(index + ': ' + val);
-});
+var game = require ('./app/game');
+var input = require ('./app/input');

@@ -3,18 +3,18 @@ var Bowling = require("../app/bowling");
 
 describe("bowling game", function(){
 
-  describe("returns an integer when given a bowling score without special characters", function(){
+  var game;
+  beforeEach(function(){
+    game = new Bowling.Game();
+  });
 
-    var game;
-    beforeEach(function(){
-      game = new Bowling.Game();
-    });
+  describe("returns an integer when given a bowling score without special characters", function(){
 
     it("scores a gutter game as 0", function(){
       for (var i = 0; i < 20; i++){
         game.roll(0);
       }
-      expect(game._score).to.equal(0);
+      expect(game.score()).to.equal(0);
     });
 
     it("scores a game where all shots score 1 as 20", function(){
@@ -37,6 +37,111 @@ describe("bowling game", function(){
         game.roll(0);
       }
       expect(game.score()).to.equal(90);
+    });
+  });
+  describe("returns an integer when given a score with special characters", function(){
+
+    describe("when the player scores a spare", function(){
+
+      it("scores a game with one spare and where remaining shots are gutters", function(){
+        game.roll(7);
+        game.roll(3);
+        for (var i = 0; i < 18 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(10);
+      });
+
+      it("scores a game with a spare and a subsequent score", function(){
+        game.roll(7);
+        game.roll(3);
+        game.roll(5);
+        for (var i = 0; i < 17 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(20);
+      });
+    });
+
+    describe("when the player scores a strike", function(){
+
+      it("scores a game with a strike and all remaining shots are gutters", function(){
+        game.roll(10);
+        for (var i = 0; i < 19 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(10);
+      });
+
+      it("scores a game with a strike and two subsequent scoring shots", function(){
+        game.roll(10);
+        game.roll(7);
+        game.roll(2);
+        for (var i = 0; i < 16 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(28);
+      });
+
+      it("Scores a game where a player scores a strike, followed by a spare", function(){
+        game.roll(10);
+        game.roll(9);
+        game.roll(1);
+        for (var i = 0; i < 16 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(30);
+      });
+    });
+
+    describe("when the player scores a double strike", function(){
+
+      it("Scores a game with a double strike and all remaining shots are gutters", function(){
+        game.roll(10);
+        game.roll(10);
+        for (var i = 0; i < 18 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(30);
+      });
+
+      it("scores a game with a double strike with subsequent scores", function(){
+        game.roll(10);
+        game.roll(10);
+        game.roll(2);
+        game.roll(3);
+        game.roll(1);
+        for (var i = 0; i < 13 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(43);
+      });
+    });
+
+    describe("when the player scores a turkey", function(){
+
+      it("Scores a game with a double strike and all remaining shots are gutters", function(){
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+        for (var i = 0; i < 14 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(60);
+      });
+
+      it("scores a game with a double strike with subsequent scores", function(){
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(2);
+        game.roll(3);
+        game.roll(1);
+        for (var i = 0; i < 11 ; i++) {
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(73);
+      });
     });
   });
 });
