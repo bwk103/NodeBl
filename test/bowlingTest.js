@@ -94,7 +94,7 @@ describe("bowling game", function(){
       });
     });
 
-    describe("when the player scores a double strike", function(){
+    describe("when the player scores a double strike (2 consecutive strikes)", function(){
 
       it("Scores a game with a double strike and all remaining shots are gutters", function(){
         game.roll(10);
@@ -118,9 +118,9 @@ describe("bowling game", function(){
       });
     });
 
-    describe("when the player scores a turkey", function(){
+    describe("when the player scores a 'Turkey'(3 consecutive strikes)", function(){
 
-      it("Scores a game with a double strike and all remaining shots are gutters", function(){
+      it("Scores a game with a Turkey and all remaining shots are gutters", function(){
         game.roll(10);
         game.roll(10);
         game.roll(10);
@@ -130,7 +130,7 @@ describe("bowling game", function(){
         expect(game.score()).to.equal(60);
       });
 
-      it("scores a game with a double strike with subsequent scores", function(){
+      it("scores a game with a Turkey with subsequent scores", function(){
         game.roll(10);
         game.roll(10);
         game.roll(10);
@@ -144,7 +144,145 @@ describe("bowling game", function(){
       });
     });
 
-    describe("when the player bowls ten strikes", function(){
+    describe("when the player scores a 'Goose' (4 consecutive strikes)", function(){
+
+      it("scores a game with a Goose and remaining balls are gutters", function(){
+        for(var i = 0; i < 4; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 12; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(90);
+      });
+
+      it("scores a game with a Goose and subsequent scoring shots", function(){
+        for(var i = 0; i < 4; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 12; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(150);
+      });
+    });
+
+    describe("when the player scores a 'Chicken' (5 consecutive strikes)", function(){
+
+      it("scores a game with a Chicken and remaining balls are gutters", function(){
+        for(var i = 0; i < 5; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 10; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(120);
+      });
+
+      it("scores a game with a Chicken and subsequent scoring shots", function(){
+        for(var i = 0; i < 5; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 10; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(172);
+      });
+    });
+
+    describe("when the player scores a 'Turducken' (6 consecutive strikes)", function(){
+
+      it("scores a game with a Turducken and remaining balls are gutters", function(){
+        for(var i = 0; i < 6; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 8; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(150);
+      });
+
+      it("scores a game with a Turducken and subsequent scoring shots", function(){
+        for(var i = 0; i < 6; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 8; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(194);
+      });
+    });
+
+    describe("when the player scores a 'Penguin' (7 consecutive strikes)", function(){
+
+      it("scores a game with a Penguin and remaining balls are gutters", function(){
+        for(var i = 0; i < 7; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 6; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(180);
+      });
+
+      it("scores a game with a Penguin and subsequent scoring shots", function(){
+        for(var i = 0; i < 7; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 6; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(216);
+      });
+    });
+
+    describe("when the player scores a 'Flamingo' (8 consecutive strikes)", function(){
+
+      it("scores a game with a Flamingo and remaining balls are gutters", function(){
+        for(var i = 0; i < 8; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 4; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(210);
+      });
+
+      it("scores a game with a Flamingo and subsequent scoring shots", function(){
+        for(var i = 0; i < 8; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 4; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(238);
+      });
+    });
+
+    describe("when the player scores a 'Turkey Vulture' (9 consecutive strikes)", function(){
+
+      it("scores a game with a Turkey Vulture and remaining balls are gutters", function(){
+        for(var i = 0; i < 9; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 2; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(240);
+      });
+
+      it("scores a game with a Turkey Vulture and subsequent scoring shots", function(){
+        for(var i = 0; i < 9; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 2; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(260);
+      });
+    });
+
+    describe("when the player scores a 'Woodpecker' (10 consecutive strikes)", function(){
 
       it("scores a game with 10 strikes and two bonus gutters", function(){
         for (var i = 0; i < 10 ; i++) {
@@ -174,7 +312,30 @@ describe("bowling game", function(){
       });
     });
 
-    describe("when the player bowls a perfect game", function(){
+    describe("when the player scores an 'Eagle' (11 consecutive strikes)", function(){
+
+      it("scores a game with an Eagle and the remaining ball is a gutter", function(){
+        for(var i = 0; i < 11; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 1; j++){
+          game.roll(0);
+        }
+        expect(game.score()).to.equal(290);
+      });
+
+      it("scores a game with a Eagle and scores with the bonus shot", function(){
+        for(var i = 0; i < 11; i++){
+          game.roll(10);
+        }
+        for(var j = 0; j < 1; j++){
+          game.roll(4);
+        }
+        expect(game.score()).to.equal(294);
+      });
+    });
+
+    describe("when the player bowls a 'Turkey Hawk' (12 consecutive strikes)", function(){
       it("scores 12 consecutive strikes", function(){
         for (var i = 0; i < 12 ; i++) {
           game.roll(10);
