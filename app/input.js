@@ -11,11 +11,7 @@ if (stringScore !== undefined){
 }
 
 function removePipes(stringScore){
-  if (stringScore[stringScore.length - 1] === '|'){
-     return stringScore.substring(0, stringScore.length -2);
-  } else {
-    return stringScore.replace("||", "|");
-  }
+  return stringScore.replace(/(\||,)/g, "");
 }
 
 // Convert any '-' characters to 0
@@ -33,23 +29,39 @@ if (stringScore !== undefined) {
 }
 
 function splitScore(stringScore){
-    return stringScore.split("|");
+    return stringScore.split("");
 }
 
-// Convert element of array into integer, add together giving frame score
-if (arrayScore !== undefined){
-  console.log(arrayScore);
-  arrayScore = convertToInt(arrayScore);
+// replace special characters with numbers
+
+if (stringScore !== undefined) {
+  var arrayScore = changeSpecialChars(arrayScore);
 }
+
+function changeSpecialChars(arrayScore){
+  arrayScore.forEach(function(element, index){
+    if(element === "X"){
+      arrayScore[index] = "10";
+    } else if (element === "/"){
+      arrayScore[index] = (10 - parseInt(arrayScore[index -1]));
+    }
+  });
+  return arrayScore;
+}
+
+
+if (stringScore !== undefined) {
+  var arrayScore = convertToInt(arrayScore);
+}
+// convert array to ints
 
 function convertToInt(array){
   return array.map(function(score){
-    var firstScore = parseInt(score[0]);
-    var secondScore = parseInt(score[1]);
-    return firstScore + secondScore;
+    return parseInt(score);
   });
 }
 
+console.log(arrayScore);
 
 // Call game.roll using each score and return score
 if (arrayScore !== undefined) {
