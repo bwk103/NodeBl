@@ -143,5 +143,44 @@ describe("bowling game", function(){
         expect(game.score()).to.equal(73);
       });
     });
+
+    describe("when the player bowls ten strikes", function(){
+
+      it("scores a game with 10 strikes and two bonus gutters", function(){
+        for (var i = 0; i < 10 ; i++) {
+          game.roll(10);
+        }
+        game.roll(0);
+        game.roll(0);
+        expect(game.score()).to.equal(270);
+      });
+
+      it("scores a game with 10 strikes and two scoring bonus shots", function(){
+        for (var i = 0; i < 10 ; i++) {
+          game.roll(10);
+        }
+        game.roll(4);
+        game.roll(2);
+        expect(game.score()).to.equal(280);
+      });
+
+      it("scores a game with 10 strikes and a spare", function(){
+        for (var i = 0; i < 10 ; i++) {
+          game.roll(10);
+        }
+        game.roll(5);
+        game.roll(5);
+        expect(game.score()).to.equal(285);
+      });
+    });
+
+    describe("when the player bowls a perfect game", function(){
+      it("scores 12 consecutive strikes", function(){
+        for (var i = 0; i < 12 ; i++) {
+          game.roll(10);
+        }
+        expect(game.score()).to.equal(300);
+      });
+    });
   });
 });
