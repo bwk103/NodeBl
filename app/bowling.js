@@ -6,8 +6,6 @@ Game.prototype.roll = function(num){
   this._throws.push(num);
 };
 
-
-
 Game.prototype.score = function(){
   var score = 0;
   for (var frameIndex = 0, throwIndex = 0; frameIndex < 10; frameIndex ++, throwIndex += 2){

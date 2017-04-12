@@ -61,6 +61,7 @@ function convertToInt(array){
   });
 }
 
+console.log(arrayScore);
 
 // Call game.roll using each score and return score
 if (arrayScore !== undefined) {
