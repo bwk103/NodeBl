@@ -43,6 +43,7 @@ In order to use the program, follow the steps below:
 
 - Visit the [GitHub repository](https://github.com/bwk103/NodeBl)
 - $ git clone https://github.com/bwk103/NodeBl.git
+- $ cd NodeBl
 - $ npm install
 - $ node index.js "*score as a string*"
 
