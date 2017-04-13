@@ -5,6 +5,7 @@ var Bowling = require ('./app/Bowling'),
     input = new Input.getInput(),
     game = new Bowling.Game(),
     scores = input.getScore();
+
     game._throws = scores;
 
     printer.result(game.score());

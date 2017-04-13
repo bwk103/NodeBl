@@ -35,4 +35,27 @@ describe("GetInput", function(){
       expect(getInput.formatScore(fakeStringScore)).to.have.members([2, 8, 5, 5, 1, 9, 9, 1]);
     });
   });
+
+  describe("#checkLength", function(){
+    it("raises an error if the string has fewer that 11 characters", function(){
+      var fakeStringScore = "X|X|-||";
+      expect( () => getInput.checkLength(fakeStringScore)).to.throw(Error, /The string is too short to be a valid score/);
+    });
+
+    it("raises an error if the string has more than 21 characters", function(){
+      var fakeStringScore = "--|--|--|--|--|--|--|--|--|--|--|--|";
+      expect( () => getInput.checkLength(fakeStringScore)).to.throw(Error, /The string is too long to be a valid score/);
+    });
+  });
+
+  describe("#checkChars", function(){
+    it("raises an error if the string contains any invalid characters", function(){
+      var fakeArray = ["F", "F", "3", "4", "X", "D", "E", "3", "2", "4", "1", "2", "4", "4", "2", "D", "A"];
+      expect( () => getInput.checkChars(fakeArray)).to.throw(Error, /This string contains invalid characters/);
+    });
+    it("does not raise an error if the string does not contain invalid characters", function(){
+      var fakeArray = ["1", "2", "10", "3", "5", "3"];
+      expect( () => getInput.checkChars(fakeArray)).to.not.throw(Error, /This string contains invalid characters/);
+    });
+  });
 });

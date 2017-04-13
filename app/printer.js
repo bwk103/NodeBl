@@ -13,8 +13,11 @@ Print.prototype.result = function(finalScore){
     console.log("You scored " + finalScore + ". " + this._responses[2]);
   } else if (finalScore > 100){
     console.log("You scored " + finalScore + ". " + this._responses[1]);
-  } else
+  } else if (finalScore === isNaN){
+    console.log("I'm sorry, you provided an invalid score");
+  } else {
     console.log("You scored " + finalScore + ". " + this._responses[0]);
+  }
 };
 
 exports.Print = Print;

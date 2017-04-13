@@ -12,11 +12,30 @@ getInput.prototype.getScore = function(){
 
 getInput.prototype.formatScore = function(scoreString){
   scoreString = removePipes(scoreString);
+  this.checkLength(scoreString);
   scoreString = replaceDash(scoreString);
   scoreString = splitScore(scoreString);
   scoreString = changeSpecialChars(scoreString);
+  this.checkChars(scoreString);
   scoreString = convertToInt(scoreString);
   return scoreString;
+};
+
+getInput.prototype.checkLength = function(scoreString){
+  if (scoreString.length < 11){
+    throw new Error("The string is too short to be a valid score");
+  } else if (scoreString.length > 21){
+    throw new Error("The string is too long to be a valid score");
+  }
+};
+
+getInput.prototype.checkChars = function(scoreArray){
+  var check = /^\d+$/;
+  scoreArray.forEach(function(score){
+    if (check.test(score) === false){
+      throw new Error("This string contains invalid characters");
+    }
+  });
 };
 
 
